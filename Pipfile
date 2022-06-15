@@ -9,6 +9,9 @@ cloudinary = "*"
 whitenoise = "*"
 gunicorn = "*"
 psycopg2 = "*"
+django-bootstrap4 = "*"
+bootstrap4 = "*"
+djangorestframework = "*"
 
 [dev-packages]
 

@@ -11,7 +11,6 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 """
 
 from pathlib import Path
-
 import cloudinary
 import cloudinary.uploader
 import cloudinary.api
@@ -53,6 +52,7 @@ INSTALLED_APPS = [
     'app',
     'cloudinary',
     'bootstrap4',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [

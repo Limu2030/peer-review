@@ -1,16 +1,32 @@
+from unicodedata import name
 from django.urls import path
 from . import views 
+from .views import SearchResultsView, rating
 
 urlpatterns = [
     path('', views.index, name='home'),
-    path('register/', views.register, name='register'),
-    path('login/', views.login, name='login'),
-    path('profile/', views.profile, name='profile'),
-    path('update_profile/', views.update_profile, name='update'),
-    path('post/', views.post, name='post'),
-    path('search/', views.search, name='search'),
-    path('ratings/', views.ratings, name='ratings'),
-    path('details/', views.details, name='details'),
     
-
+    path('login/', views.user_login, name='login'),
+    
+    path('register/', views.register, name='register'),
+    
+    path('logout/', views.user_logout, name='logout'),
+    
+    path('post/', views.user_post, name='post'),
+    
+    path('profile/', views.user_profile, name ='profile'),
+    
+    path('update_profile/', views.update_profile, name ='update'),
+    
+    path('search/', SearchResultsView.as_view(), name='search'),
+    
+    path('ratings/<title>', views.rating, name="ratings"),
+    
+    path('api/profile/', views.ProfileRecords.as_view()),
+    
+    path('api/project/', views.ProjectRecords.as_view()),
+    
+    path('project/<title>/project_details', views.projectdetails, name='details')
+    
+    
 ]
