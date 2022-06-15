@@ -20,3 +20,5 @@ def update_profile(request):
 def post(request):
     return render(request, 'post.html')     
 
+def search(request):
+    return render(request, 'search.html')
