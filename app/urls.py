@@ -10,5 +10,7 @@ urlpatterns = [
     path('post/', views.post, name='post'),
     path('search/', views.search, name='search'),
     path('ratings/', views.ratings, name='ratings'),
+    path('details/', views.details, name='details'),
+    
 
 ]

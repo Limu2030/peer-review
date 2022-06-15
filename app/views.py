@@ -25,3 +25,6 @@ def search(request):
 
 def ratings(request):
     return render(request, 'ratings.html')    
+
+def details(request):
+    return render(request, 'details.html')
