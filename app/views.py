@@ -15,4 +15,8 @@ def profile(request):
     return render(request, 'profile.html')
 
 def update_profile(request):
-    return render(request, 'login.html')          
+    return render(request, 'update_profile.html')   
+
+def post(request):
+    return render(request, 'post.html')     
+
