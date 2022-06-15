@@ -22,3 +22,6 @@ def post(request):
 
 def search(request):
     return render(request, 'search.html')
+
+def ratings(request):
+    return render(request, 'ratings.html')    
