@@ -1,0 +1,176 @@
+{% extends 'base.html' %}
+{% load bootstrap4 %}
+{% load static %}
+{% block title %}Awwwards|Project_Details{% endblock title%}
+{% block content %}
+<div class="container-fluid">
+    {% include 'navbar.html' %}
+
+    <div class="detail-hero">
+        <div class="details " id="detail">
+            <h1 class=" text-white" id="heading-title">{{project.title}}</h1>
+        </div>
+
+    </div>
+
+
+    <div class="div.col-md-12 mt-4">
+        <div class="body">
+            <div class="col-md-12">
+                <div class="row">
+                    <div class="col-md-8">
+                        <img src="{{project.post_image.url}}" class="card-img-top" alt="{{ project.title }}"
+                            id="project-screenshot">
+                    </div>
+
+                    <div class="col-md-4">
+                        <p>{{project.description}}</p>
+
+                        <div class="col-md-12 p-2 rounded shadow clearfix">
+                            <h5 id="border-bottom">Links & Technologies</h5>
+                            <p>Links</p>
+                            <a href="{{project.url}}">
+                                <p>Live site</p>
+                            </a>
+                            <hr>
+                            <p>Technology / Language</p>
+                            <p>{{project.languages}}</p>
+
+                        </div>
+                        <h5 class="desc mt-2">Designed By</h5>
+                        <div class="d-flex flex-row user-info">
+                            {% if request.user.profile.profile_pic.url %}
+                            <img class="rounded" src="{{ project.user.profile.profile_pic.url }}"
+                                id="user-profile-image">
+                            {% else %}
+                            <img class="rounded"
+                                src="https://cdn.icon-icons.com/icons2/1154/PNG/512/1486564400-account_81513.png"
+                                id="user-profile-image">
+                            {% endif %}
+                            <div class="d-flex flex-column justify-content-start ml-2">
+                                <a href="">
+                                    <span class="name"><b>{{user.first_name }} {{user.last_name }}</b></span>
+                                </a>
+                                <span class="date"><i class="fas fa-calendar-alt"></i>
+                                    {{ project.posted_at }}</span>
+                            </div>
+                            <br>
+                        </div>
+                    </div>
+                </div>
+                <hr>
+                <div class="row mt-2">
+                    <div class="col-md-4 rounded shadow p-4 mb-4 ml-4 clearfix">
+
+                        <h4 id="ratings-currently">Current Project Rating</h4>
+                        <hr id="hr">
+                        {% if ratings %}
+                        {% for rating in ratings %}
+                        <div class="">
+                            <h1 class=" mb-4 mt-2 " id="rating-title">
+                                {{ rating.average }}</h1>
+
+                            <p class="text-center">Based on {{count|length  }} ratings</p>
+                        </div>
+                        {% endfor %}
+                        {% else %}
+                        <div class="">
+                            <h1 class="mb-4 mt-2" id="rating-title">0.0</h1>
+                            <p class="text-center">Based on {{ count|length  }} ratings</p>
+                        </div>
+                        {% endif %}
+
+                    </div>
+                    <div class="col-md-7 shadow ml-4">
+                        <h5 class="p-4" id="reviews-title">Recent Reviews</h5>
+                        {% if user.is_authenticated %}
+                        <a href="#" data-toggle="modal" data-target="#exampleModal{{project.id}}">
+                            <p class="float-md-right">
+                                <button id="review-btn">Review & Rate</button>
+                            </p>
+                        </a>
+                        {% else %}
+                        <a href="{% url 'login' %}">
+                            <p class="float-md-right">
+                                <button id="review-btn"> Login to Rate </button>
+                            </p>
+                        </a>
+
+                        {% endif %}
+                        {% if ratings %}
+                        {% for rating in ratings %}
+                        <div class="col-md-10">
+                            <p id="comment-paragraph">{{rating.comment}}</p>
+                        </div>
+
+                        {% endfor %}
+                        {% endif %}
+
+
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="exampleModal{{project.id}}" tabindex="-1" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog  modal-dialog-centered modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">{{project.title}}</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form class="ratings-form" action="{% url 'ratings' project.title %}" method="POST">
+                    {% csrf_token %}
+                    <div class="mb-3">
+                        <label for="Comment">Comment</label>
+                        <textarea class="form-control" name="comment" id="comment" rows="5"></textarea>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="mb-3">
+                                <label for="Design">Design</label>
+                                <input type="number" class="form-control" name="design" min="0" max="10" value="0">
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="mb-3">
+                                <label for="Usability">Usability</label>
+                                <input type="number" class="form-control" name="usability" min="0" max="10" value="0">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="mb-3">
+                                <label for="Content">Content</label>
+                                <input type="number" class="form-control" name="content" min="0" max="10" value="0">
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="mb-3">
+                                <label for="Creativity">Creativity</label>
+                                <input type="number" class="form-control" name="creativity" min="0" max="10" value="0">
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-outline-info">Rate & Review</button>
+                        <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Close</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}
