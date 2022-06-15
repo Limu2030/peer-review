@@ -13,9 +13,9 @@
 ## Description
 
 
-<img src="core/static/core/images/pygramappscreenshot.png" alt="landingpage" width="" height=""/>
+<!-- <img src="core/static/core/images/pygramappscreenshot.png" alt="landingpage" width="" height=""/> -->
 
-<p>A django based application that is a replication of the instagram app. Users are able to log in, register if they have no accounts.Like pictures and comment on pictures as well as search users based on their profile.Users are also able to update their profiles and add posts.</p>
+<p>Peer Review is a replica of the popular website Awwwards. The application will allow a user to post a project he/she has created and get it reviewed by his/her peers.</p>
 
 
 
@@ -33,7 +33,7 @@
 
 ### Cloning
 
-$ git clone https://github.com/limu2030/photo-app
+$ git clone https://github.com/limu2030/peer-review
 
 Move into directory and install requirements
 
