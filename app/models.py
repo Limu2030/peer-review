@@ -49,3 +49,30 @@ class Project(models.Model):
         
     def update_project_post(self):
         self.update()
+
+
+class Rating(models.Model):
+    project_name = models.CharField(max_length=100,null=True, blank=True)
+    comment = models.CharField(max_length=1000, null=True)
+    design = models.IntegerField(null=True,default=0)
+    usability = models.IntegerField(null=True,default=0)
+    content = models.IntegerField(null=True,default=0)
+    creativity = models.IntegerField(null=True,default=0)
+    total =  models.IntegerField(null=True,default=0)
+    average=models.FloatField(max_length=10,null=True)
+    rator = models.ForeignKey(User,null = True, on_delete=models.CASCADE)
+    project = models.ForeignKey(Project, related_name='rating',null=True, on_delete=models.CASCADE)
+    rating_date = models.DateTimeField(auto_now_add=True, null=True)
+    
+    
+    def __str__(self):
+        return self.comment
+    
+    def save_rating(self):
+        self.save()
+        
+    def delete_rating(self):
+        self.save()
+        
+    def update_rating(self):
+        self.update()
