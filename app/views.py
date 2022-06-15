@@ -108,7 +108,7 @@ def search(request):
 
 class SearchResultsView(ListView):
     model = Project
-    template_name = "search_results.html"
+    template_name = "search.html"
     
     def get_queryset(self):  # new
         query = self.request.GET.get("query")
